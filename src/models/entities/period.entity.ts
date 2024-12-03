@@ -16,16 +16,16 @@ export class Period {
 
 	@OneToMany(
 		() => EventApplication,
-		(eventApplication) => eventApplication.period
+		(eventApplication) => eventApplication.periodRel
 	)
-	eventApplications: EventApplication[]
+	eventApplicationsRel: EventApplication[]
 
 	@OneToMany(
 		() => AssistantApplication,
-		(assistantApplication) => assistantApplication.period
+		(assistantApplication) => assistantApplication.periodRel
 	)
-	assistantApplications: AssistantApplication[]
+	assistantApplicationsRel: AssistantApplication[]
 
-	@OneToMany(() => Assistant, (assistant) => assistant.period)
-	assistants: Assistant[]
+	@OneToMany(() => Assistant, (assistant) => assistant.periodRel)
+	assistantsRel: Assistant[]
 }

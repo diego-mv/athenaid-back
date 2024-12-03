@@ -10,49 +10,67 @@ export class AssistantApplication {
 	@PrimaryColumn()
 	id: string
 
-	@ManyToOne(() => Subject, (subject) => subject.assistantApplications, {
+	@ManyToOne(() => Subject, (subject) => subject.assistantApplicationsRel, {
 		nullable: true,
 		onDelete: 'SET NULL'
 	})
+	@Column({ name: 'subject_id' })
+	subject_id: string
+
 	@JoinColumn({ name: 'subject_id' })
-	subject: Subject
+	subjectRel: Subject
 
-	@ManyToOne(() => User, (user) => user.assistantApplications, {
+	@ManyToOne(() => User, (user) => user.assistantApplicationsRel, {
 		nullable: false,
 		onDelete: 'CASCADE'
 	})
+	@Column({ name: 'user_id' })
+	user_id: string
+
 	@JoinColumn({ name: 'user_id' })
-	user: User
+	userRel: User
 
-	@ManyToOne(() => Period, (period) => period.assistantApplications, {
+	@ManyToOne(() => Period, (period) => period.assistantApplicationsRel, {
 		nullable: false,
 		onDelete: 'CASCADE'
 	})
+	@Column({ name: 'period_id' })
+	period_id: string
+
 	@JoinColumn({ name: 'period_id' })
-	period: Period
+	periodRel: Period
 
 	@ManyToOne(
 		() => EventApplication,
-		(eventApplication) => eventApplication.assistantApplications,
+		(eventApplication) => eventApplication.assistantApplicationsRel,
 		{ nullable: true, onDelete: 'CASCADE' }
 	)
+	@Column({ name: 'event_id' })
+	event_id: string
+
 	@JoinColumn({ name: 'event_id' })
-	event: EventApplication
+	eventRel: EventApplication
 
 	@ManyToOne(
 		() => StateApplication,
-		(stateApplication) => stateApplication.assistantApplications,
+		(stateApplication) => stateApplication.assistantApplicationsRel,
 		{ nullable: true, onDelete: 'SET NULL' }
 	)
-	@JoinColumn({ name: 'state_id' })
-	state: StateApplication
+	@Column({ name: 'state_id' })
+	state_id: string
 
-	@ManyToOne(() => User, (user) => user.assistantApplications, {
+	@JoinColumn({ name: 'state_id' })
+	stateRel: StateApplication
+
+	@ManyToOne(() => User, (user) => user.assistantApplicationsRel, {
 		nullable: true,
 		onDelete: 'SET NULL'
 	})
+	@Column({ name: 'last_editor_id' })
+	last_editor_id: string
+
 	@JoinColumn({ name: 'last_editor_id' })
-	lastEditor: User
+	lastEditorRel: User
 
 	@Column()
 	date: Date

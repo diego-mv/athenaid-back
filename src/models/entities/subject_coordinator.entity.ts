@@ -1,4 +1,4 @@
-import { Entity, PrimaryColumn, ManyToOne, JoinColumn } from 'typeorm'
+import { Entity, PrimaryColumn, ManyToOne, JoinColumn, Column } from 'typeorm'
 import { User } from './user.entity'
 import { Subject } from './subject.entity'
 
@@ -7,11 +7,17 @@ export class SubjectCoordinator {
 	@PrimaryColumn()
 	id: string
 
-	@ManyToOne(() => User, (user) => user.subjectCoordinators)
-	@JoinColumn({ name: 'coordinator_id' })
-	coordinator: User
+	@Column('coordinatorid')
+	coordinator_id: string
 
-	@ManyToOne(() => Subject, (subject) => subject.subjectCoordinators)
+	@Column('subject_id')
+	subject_id: string
+
+	@ManyToOne(() => User, (user) => user.subjectCoordinatorsRel)
+	@JoinColumn({ name: 'coordinator_id' })
+	coordinatorRel: User
+
+	@ManyToOne(() => Subject, (subject) => subject.subjectCoordinatorsRel)
 	@JoinColumn({ name: 'subject_id' })
-	subject: Subject
+	subjectRel: Subject
 }

@@ -20,16 +20,19 @@ export class Section {
 	@Column({ default: true })
 	active: boolean
 
-	@ManyToOne(() => Subject, (subject) => subject.sections, {
+	@Column({ name: 'subject_id' })
+	subject_id: string
+
+	@ManyToOne(() => Subject, (subject) => subject.sectionsRel, {
 		nullable: true,
 		onDelete: 'SET NULL'
 	})
 	@JoinColumn({ name: 'subject_id' })
-	subject: Subject
+	subjectRel: Subject
 
-	@OneToMany(() => Assistant, (assistant) => assistant.section, {
+	@OneToMany(() => Assistant, (assistant) => assistant.sectionRel, {
 		nullable: false,
 		onDelete: 'CASCADE'
 	})
-	assistants: Assistant[]
+	assistantsRel: Assistant[]
 }

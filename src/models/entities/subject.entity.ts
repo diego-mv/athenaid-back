@@ -20,18 +20,18 @@ export class Subject {
 	@Column({ default: true })
 	active: boolean
 
-	@OneToMany(() => Section, (section) => section.subject)
-	sections: Section[]
+	@OneToMany(() => Section, (section) => section.subjectRel)
+	sectionsRel: Section[]
 
 	@OneToMany(
 		() => SubjectCoordinator,
-		(subjectCoordinator) => subjectCoordinator.subject
+		(subjectCoordinator) => subjectCoordinator.subjectRel
 	)
-	subjectCoordinators: SubjectCoordinator[]
+	subjectCoordinatorsRel: SubjectCoordinator[]
 
 	@OneToMany(
 		() => AssistantApplication,
-		(assistantApplication) => assistantApplication.subject
+		(assistantApplication) => assistantApplication.subjectRel
 	)
-	assistantApplications: AssistantApplication[]
+	assistantApplicationsRel: AssistantApplication[]
 }

@@ -11,7 +11,7 @@ export class StateApplication {
 
 	@OneToMany(
 		() => AssistantApplication,
-		(assistantApplication) => assistantApplication.state
+		(assistantApplication) => assistantApplication.stateRel
 	)
-	assistantApplications: AssistantApplication[]
+	assistantApplicationsRel: AssistantApplication[]
 }

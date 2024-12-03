@@ -9,7 +9,7 @@ export const createUserSchemaToEntity = (
 		id: uuid(),
 		email: schema.email,
 		fullname: schema.fullname,
-		role: role,
+		roleRel: role,
 		role_id: role.id
 	}
 }
@@ -21,7 +21,7 @@ export const userDtoToUserJwt = (
 		id: user.id,
 		email: user.email,
 		fullname: user.fullname,
-		role: user.role
+		role: user.roleRel
 	}
 }
 

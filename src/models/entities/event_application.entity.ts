@@ -18,12 +18,15 @@ export class EventApplication {
 	@Column({ length: 1024, nullable: true })
 	description: string
 
-	@ManyToOne(() => Period, (period) => period.eventApplications, {
+	@Column({ name: 'period_id' })
+	period_id: string
+
+	@ManyToOne(() => Period, (period) => period.eventApplicationsRel, {
 		nullable: true,
 		onDelete: 'SET NULL'
 	})
 	@JoinColumn({ name: 'period_id' })
-	period: Period
+	periodRel: Period
 
 	@Column()
 	startdate: Date
@@ -31,16 +34,19 @@ export class EventApplication {
 	@Column()
 	enddate: Date
 
-	@ManyToOne(() => User, (user) => user.createdEvents, {
+	@Column({ name: 'created_by' })
+	created_by: string
+
+	@ManyToOne(() => User, (user) => user.createdEventsRel, {
 		nullable: true,
 		onDelete: 'SET NULL'
 	})
 	@JoinColumn({ name: 'created_by' })
-	createdBy: User
+	createdByRel: User
 
 	@OneToMany(
 		() => AssistantApplication,
-		(assistantApplication) => assistantApplication.event
+		(assistantApplication) => assistantApplication.eventRel
 	)
-	assistantApplications: AssistantApplication[]
+	assistantApplicationsRel: AssistantApplication[]
 }

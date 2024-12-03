@@ -23,12 +23,12 @@ export class User {
 	@Column({ length: 256, unique: true })
 	email: string
 
-	@ManyToOne(() => Role, (role) => role.users, {
+	@ManyToOne(() => Role, (role) => role.usersRel, {
 		nullable: true,
 		onDelete: 'SET NULL'
 	})
 	@JoinColumn({ name: 'role_id' })
-	role: Role
+	roleRel: Role
 
 	@Column({ name: 'role_id' })
 	role_id: string
@@ -38,26 +38,26 @@ export class User {
 
 	@OneToMany(
 		() => AssistantApplication,
-		(assistantApplication) => assistantApplication.user
+		(assistantApplication) => assistantApplication.userRel
 	)
-	assistantApplications?: AssistantApplication[]
+	assistantApplicationsRel?: AssistantApplication[]
 
 	@OneToMany(
 		() => EventApplication,
-		(eventApplication) => eventApplication.createdBy
+		(eventApplication) => eventApplication.createdByRel
 	)
-	createdEvents?: EventApplication[]
+	createdEventsRel?: EventApplication[]
 
-	@OneToMany(() => Assistant, (assistant) => assistant.user, {
+	@OneToMany(() => Assistant, (assistant) => assistant.userRel, {
 		nullable: false,
 		onDelete: 'CASCADE'
 	})
-	assistants?: Assistant[]
+	assistantsRel?: Assistant[]
 
 	@OneToMany(
 		() => SubjectCoordinator,
-		(subjectCoordinator) => subjectCoordinator.coordinator,
+		(subjectCoordinator) => subjectCoordinator.coordinatorRel,
 		{ nullable: true, onDelete: 'CASCADE' }
 	)
-	subjectCoordinators?: SubjectCoordinator[]
+	subjectCoordinatorsRel?: SubjectCoordinator[]
 }

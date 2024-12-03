@@ -1,4 +1,4 @@
-import { Entity, PrimaryColumn, ManyToOne, JoinColumn } from 'typeorm'
+import { Entity, PrimaryColumn, ManyToOne, JoinColumn, Column } from 'typeorm'
 import { User } from './user.entity'
 import { Section } from './section.entity'
 import { Period } from './period.entity'
@@ -8,24 +8,33 @@ export class Assistant {
 	@PrimaryColumn()
 	id: string
 
-	@ManyToOne(() => User, (user) => user.assistants, {
+	@ManyToOne(() => User, (user) => user.assistantsRel, {
 		nullable: false,
 		onDelete: 'CASCADE'
 	})
-	@JoinColumn({ name: 'user_id' })
-	user: User
+	@Column({ name: 'user_id' })
+	user_id: string
 
-	@ManyToOne(() => Section, (section) => section.assistants, {
+	@JoinColumn({ name: 'user_id' })
+	userRel: User
+
+	@ManyToOne(() => Section, (section) => section.assistantsRel, {
 		nullable: false,
 		onDelete: 'CASCADE'
 	})
 	@JoinColumn({ name: 'section_id' })
-	section: Section
+	sectionRel: Section
 
-	@ManyToOne(() => Period, (period) => period.assistants, {
+	@Column({ name: 'section_id' })
+	section_id: string
+
+	@ManyToOne(() => Period, (period) => period.assistantsRel, {
 		nullable: false,
 		onDelete: 'CASCADE'
 	})
+	@Column({ name: 'period_id' })
+	period_id: string
+
 	@JoinColumn({ name: 'period_id' })
-	period: Period
+	periodRel: Period
 }

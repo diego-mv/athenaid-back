@@ -24,7 +24,8 @@ export class UserPostgresRepository
 		role: Entities.Role
 	): Promise<Entities.User | null> => {
 		const user = await this.getById(userId)
-		user.role = role
+		user.role_id = role.id
+		user.roleRel = role
 		this.repository.update({ id: userId }, user)
 
 		return await this.getById(userId)
