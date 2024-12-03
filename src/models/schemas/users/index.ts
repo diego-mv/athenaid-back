@@ -1,4 +1,5 @@
 import { z } from 'zod'
+import { RoleDto } from '../roles'
 
 export const UserSchema = z.object({
 	id: z
@@ -18,8 +19,28 @@ export const UserSchema = z.object({
 
 export type UserDto = z.infer<typeof UserSchema>
 
+export type UserJwtPayload = {
+	id: string
+	fullname: string
+	email: string
+	role: RoleDto
+}
+
 export const CreateUserSchema = UserSchema.omit({
 	id: true
 })
 
 export type CreateUserDto = z.infer<typeof CreateUserSchema>
+
+export const UpdateUserRoleSchema = z.object({
+	userId: z
+		.string()
+		.min(1, 'userId is required')
+		.max(64, 'userId must be at most 64 characters'),
+	roleId: z
+		.string()
+		.min(1, 'roleId is required')
+		.max(64, 'roleId must be at most 64 characters')
+})
+
+export type UpdateUserRoleDto = z.infer<typeof UpdateUserRoleSchema>

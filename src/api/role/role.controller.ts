@@ -1,7 +1,7 @@
 import { Body, Controller, Post } from '@nestjs/common'
 import { Pipes } from 'src/infrastructure/server/pipes'
 import { Schemas } from 'src/models'
-import { CreateRoleUseCase } from './create-role.uc'
+import { CreateRoleUseCase } from './use-cases/create-role.uc'
 
 @Controller('role')
 export class RoleController {

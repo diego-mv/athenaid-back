@@ -5,7 +5,8 @@ import {
 	getUserRepository
 } from 'src/dependency-injection'
 import { UserController } from './user.controller'
-import { CreateUserUseCase } from './create-user.uc'
+import { CreateUserUseCase } from './use-cases/create-user.uc'
+import { UpdateUserRoleUseCase } from './use-cases/update-user-role'
 
 @Module({
 	controllers: [UserController],
@@ -24,7 +25,9 @@ import { CreateUserUseCase } from './create-user.uc'
 				return getRoleRepository(dataSource)
 			}
 		},
-		CreateUserUseCase
+		//Use Cases
+		CreateUserUseCase,
+		UpdateUserRoleUseCase
 	]
 })
 export class UserModule {}

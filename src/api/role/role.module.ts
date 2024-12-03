@@ -1,6 +1,6 @@
 import { Module } from '@nestjs/common'
 import { getDataSource, getRoleRepository } from 'src/dependency-injection'
-import { CreateRoleUseCase } from './create-role.uc'
+import { CreateRoleUseCase } from './use-cases/create-role.uc'
 import { RoleController } from './role.controller'
 
 @Module({

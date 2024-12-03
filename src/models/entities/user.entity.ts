@@ -30,6 +30,9 @@ export class User {
 	@JoinColumn({ name: 'role_id' })
 	role: Role
 
+	@Column({ name: 'role_id' })
+	role_id: string
+
 	@JoinColumn({ name: 'pass_hash' })
 	pass_hash?: string
 

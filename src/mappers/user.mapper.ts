@@ -9,6 +9,18 @@ export const createUserSchemaToEntity = (
 		id: uuid(),
 		email: schema.email,
 		fullname: schema.fullname,
-		role: role
+		role: role,
+		role_id: role.id
+	}
+}
+
+export const mapUserDtoToUserJwt = (
+	user: Entities.User
+): Schemas.UserJwtPayload => {
+	return {
+		id: user.id,
+		email: user.email,
+		fullname: user.fullname,
+		role: user.role
 	}
 }

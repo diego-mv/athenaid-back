@@ -13,7 +13,20 @@ export class UserPostgresRepository
 		super(repository)
 	}
 
-	getUserByEmail = async (email: string) => {
-		return await this.repository.findOne({ where: { email } })
+	getByEmail = async (email: string) => {
+		return await this.repository.findOne({
+			where: { email }
+		})
+	}
+
+	updateRole = async (
+		userId: string,
+		role: Entities.Role
+	): Promise<Entities.User | null> => {
+		const user = await this.getById(userId)
+		user.role = role
+		this.repository.update({ id: userId }, user)
+
+		return await this.getById(userId)
 	}
 }
