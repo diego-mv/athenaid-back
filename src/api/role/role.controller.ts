@@ -4,8 +4,11 @@ import { Schemas } from 'src/models'
 import { CreateRoleUseCase } from './use-cases/create-role.uc'
 import { GetAllRoleUseCase } from './use-cases/get-all.uc'
 import { JwtAuthGuard } from 'src/infrastructure/server/guards/jwt-auth.guard'
+import { ApiSecurity, ApiTags } from '@nestjs/swagger'
 
+@ApiTags('role')
 @UseGuards(JwtAuthGuard)
+@ApiSecurity('bearer')
 @Controller('role')
 export class RoleController {
 	constructor(

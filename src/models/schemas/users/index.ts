@@ -1,5 +1,6 @@
 import { z } from 'zod'
 import { RoleDto } from '../roles'
+import { createZodDto } from 'nestjs-zod'
 
 export const UserSchema = z.object({
 	id: z
@@ -17,20 +18,9 @@ export const UserSchema = z.object({
 	roleId: z.string().optional()
 })
 
-export type UserDto = z.infer<typeof UserSchema>
-
-export type UserJwtPayload = {
-	id: string
-	fullname: string
-	email: string
-	role: RoleDto
-}
-
 export const CreateUserSchema = UserSchema.omit({
 	id: true
 })
-
-export type CreateUserDto = z.infer<typeof CreateUserSchema>
 
 export const UpdateUserRoleSchema = z.object({
 	userId: z
@@ -43,4 +33,13 @@ export const UpdateUserRoleSchema = z.object({
 		.max(64, 'roleId must be at most 64 characters')
 })
 
-export type UpdateUserRoleDto = z.infer<typeof UpdateUserRoleSchema>
+export class UpdateUserRoleDto extends createZodDto(UpdateUserRoleSchema) {}
+export class CreateUserDto extends createZodDto(CreateUserSchema) {}
+export class UserDto extends createZodDto(UserSchema) {}
+
+export type UserJwtPayload = {
+	id: string
+	fullname: string
+	email: string
+	role: RoleDto
+}

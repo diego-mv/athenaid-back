@@ -5,7 +5,9 @@ import { Pipes } from 'src/infrastructure/server/pipes'
 import { UpdatePasswordUseCase } from './use-cases/update_pass.uc'
 import { JwtAuthGuard } from 'src/infrastructure/server/guards/jwt-auth.guard'
 import { CurrentUser } from 'src/infrastructure/server/decorators/current-user.decorator'
+import { ApiSecurity, ApiTags } from '@nestjs/swagger'
 
+@ApiTags('auth')
 @Controller('auth')
 export class AuthController {
 	constructor(
@@ -22,6 +24,7 @@ export class AuthController {
 	}
 
 	@UseGuards(JwtAuthGuard)
+	@ApiSecurity('bearer')
 	@Put('password')
 	async updatePassword(
 		@CurrentUser() currentUser: Schemas.UserJwtPayload,

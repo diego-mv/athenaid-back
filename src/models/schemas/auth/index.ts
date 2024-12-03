@@ -1,4 +1,5 @@
 import { z } from 'zod'
+import { createZodDto } from 'nestjs-zod'
 
 export const LoginSchema = z.object({
 	email: z
@@ -18,6 +19,6 @@ export const UpdatePasswordSchema = z.object({
 		.regex(/[\W_]/, 'Password must contain at least one special character')
 })
 
-export type LoginDto = z.infer<typeof LoginSchema>
+export class LoginDto extends createZodDto(LoginSchema) {}
 
-export type UpdatePasswordDto = z.infer<typeof UpdatePasswordSchema>
+export class UpdatePasswordDto extends createZodDto(UpdatePasswordSchema) {}

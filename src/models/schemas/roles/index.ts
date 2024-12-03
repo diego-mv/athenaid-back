@@ -1,3 +1,4 @@
+import { createZodDto } from 'nestjs-zod'
 import { z } from 'zod'
 
 export const RoleSchema = z.object({
@@ -11,10 +12,10 @@ export const RoleSchema = z.object({
 		.max(64, 'Name must be at most 64 characters')
 })
 
-export type RoleDto = z.infer<typeof RoleSchema>
-
 export const CreateRoleSchema = RoleSchema.omit({
 	id: true
 })
 
-export type CreateRoleDto = z.infer<typeof CreateRoleSchema>
+//DTOs
+export class CreateRoleDto extends createZodDto(CreateRoleSchema) {}
+export class RoleDto extends createZodDto(RoleSchema) {}
