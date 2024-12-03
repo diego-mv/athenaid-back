@@ -17,7 +17,7 @@ export class Section {
 	@Column({ length: 64 })
 	code: string
 
-	@Column({ default: true })
+	@Column({ default: true, type: Boolean })
 	active: boolean
 
 	@Column({ name: 'subject_id' })
@@ -28,11 +28,11 @@ export class Section {
 		onDelete: 'SET NULL'
 	})
 	@JoinColumn({ name: 'subject_id' })
-	subjectRel: Subject
+	subjectRel?: Subject
 
 	@OneToMany(() => Assistant, (assistant) => assistant.sectionRel, {
 		nullable: false,
 		onDelete: 'CASCADE'
 	})
-	assistantsRel: Assistant[]
+	assistantsRel?: Assistant[]
 }

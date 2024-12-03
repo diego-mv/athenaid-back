@@ -4,6 +4,7 @@ import { AuthModule } from './auth/auth.module'
 import { RoleModule } from './role/role.module'
 import { UserModule } from './user/user.module'
 import { SubjectModule } from './subject/subject.module'
+import { SectionModule } from './section/section.module'
 
 @Module({
 	imports: [
@@ -11,7 +12,8 @@ import { SubjectModule } from './subject/subject.module'
 		UserModule,
 		RoleModule,
 		AuthModule,
-		SubjectModule
+		SubjectModule,
+		SectionModule
 	],
 	providers: []
 })

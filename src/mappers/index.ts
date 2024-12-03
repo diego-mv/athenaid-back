@@ -1,13 +1,19 @@
 import { createRoleToRoleEntity } from './role.mapper'
 import {
+	createSectionDtoToEntity,
+	paginatedSectionEntityToDto
+} from './section.mapper'
+import {
 	createUserSchemaToEntity,
-	userEntityToDto,
-	userDtoToUserJwt
+	userDtoToUserJwt,
+	userEntityToDto
 } from './user.mapper'
 
 export const Mapper = {
 	createUserSchemaToEntity,
 	createRoleToRoleEntity,
 	userDtoToUserJwt,
-	userEntityToDto
+	userEntityToDto,
+	createSectionDtoToEntity,
+	paginatedSectionEntityToDto
 }

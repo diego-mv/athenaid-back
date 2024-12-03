@@ -1,5 +1,6 @@
 import { getPostgresDBManager } from './infrastructure/db/postgres.connection'
 import { RolePostgresRepository } from './infrastructure/repository/role.postgres.repository'
+import { SectionPostgresRepository } from './infrastructure/repository/section.postgres.repository'
 import { SubjectPostgresRepository } from './infrastructure/repository/subject.postgres.repository'
 import { SubjectCoordinatorPostgresRepository } from './infrastructure/repository/subject_coordinator.postgres.repository'
 import { UserPostgresRepository } from './infrastructure/repository/user.postgres.repository'
@@ -22,3 +23,6 @@ export const getSubjectCoordinatorRepository = async (DataSource) =>
 	new SubjectCoordinatorPostgresRepository(
 		DataSource.getRepository(Entities.SubjectCoordinator)
 	)
+
+export const getSectionRepository = async (DataSource) =>
+	new SectionPostgresRepository(DataSource.getRepository(Entities.Section))
