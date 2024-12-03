@@ -1,12 +1,21 @@
-import { Body, Controller, Delete, Post, Put, UseGuards } from '@nestjs/common'
-import { CreateSubjectUseCase } from './use-cases/create-subject.uc'
-import { Pipes } from 'src/infrastructure/server/pipes'
-import { Schemas } from 'src/models'
+import {
+	Body,
+	Controller,
+	Delete,
+	Param,
+	Post,
+	Put,
+	UseGuards
+} from '@nestjs/common'
 import { ApiSecurity, ApiTags } from '@nestjs/swagger'
 import { JwtAuthGuard } from 'src/infrastructure/server/guards/jwt-auth.guard'
-import { UpdateSubjectUseCase } from './use-cases/update-subject.uc'
+import { Pipes } from 'src/infrastructure/server/pipes'
+import { Schemas } from 'src/models'
 import { AddCoordinatorUseCase } from './use-cases/add-coordinator.uc'
+import { CreateSubjectUseCase } from './use-cases/create-subject.uc'
+import { DeleteSubjectUseCase } from './use-cases/delete-subject.uc'
 import { RemoveCoordinatorUseCase } from './use-cases/remove-coordinator.uc'
+import { UpdateSubjectUseCase } from './use-cases/update-subject.uc'
 
 @ApiTags('subject')
 @ApiSecurity('bearer')
@@ -17,6 +26,7 @@ export class SubjectController {
 		private readonly createSubjectUC: CreateSubjectUseCase,
 		private readonly updateSubjectUC: UpdateSubjectUseCase,
 		private readonly removeCoordinatorUC: RemoveCoordinatorUseCase,
+		private readonly deleteSubjectUC: DeleteSubjectUseCase,
 		private readonly addCoordinatorUC: AddCoordinatorUseCase
 	) {}
 
@@ -50,5 +60,10 @@ export class SubjectController {
 		subjectCoordinatorData: Schemas.SubjectCoordinatorDto
 	) {
 		return await this.removeCoordinatorUC.execute(subjectCoordinatorData)
+	}
+
+	@Delete(':subjectId')
+	async deleteSubject(@Param('subjectId') subjectId: string) {
+		return await this.deleteSubjectUC.execute(subjectId)
 	}
 }

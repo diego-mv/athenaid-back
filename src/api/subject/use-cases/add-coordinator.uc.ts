@@ -3,8 +3,8 @@ import { ErrorUpdateSubject } from 'src/domain/errors/subject'
 import { ISubjectRepository } from 'src/domain/interface/repositories/subject.repository'
 import { ISubjectCoordinatorRepository } from 'src/domain/interface/repositories/subject_coordinator.repository'
 import { IUserRepository } from 'src/domain/interface/repositories/user.repository'
-import { SubjectValidationHelper } from 'src/infrastructure/helpers/subject.helper'
-import { UserValidationHelper } from 'src/infrastructure/helpers/user.helper'
+import { SubjectHelper } from 'src/infrastructure/helpers/subject.helper'
+import { UserHelper } from 'src/infrastructure/helpers/user.helper'
 import { Entities, Schemas } from 'src/models'
 import { v4 as uuid } from 'uuid'
 
@@ -22,11 +22,11 @@ export class AddCoordinatorUseCase {
 		subjectCoordinatorData: Schemas.SubjectCoordinatorDto
 	): Promise<void> => {
 		try {
-			await SubjectValidationHelper.validateSubject(
+			await SubjectHelper.validateSubject(
 				this.subjectRepository,
 				subjectCoordinatorData.subject_id
 			)
-			await UserValidationHelper.validateUser(
+			await UserHelper.validateUser(
 				this.userRepository,
 				subjectCoordinatorData.coordinator_id
 			)

@@ -1,7 +1,7 @@
 import { IUserRepository } from 'src/domain/interface/repositories/user.repository'
 import { Entities } from 'src/models'
 
-export class UserValidationHelper {
+export class UserHelper {
 	static async validateUser(
 		userRepository: IUserRepository,
 		userId: string

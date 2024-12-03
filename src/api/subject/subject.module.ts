@@ -10,12 +10,14 @@ import { CreateSubjectUseCase } from './use-cases/create-subject.uc'
 import { UpdateSubjectUseCase } from './use-cases/update-subject.uc'
 import { AddCoordinatorUseCase } from './use-cases/add-coordinator.uc'
 import { RemoveCoordinatorUseCase } from './use-cases/remove-coordinator.uc'
+import { DeleteSubjectUseCase } from './use-cases/delete-subject.uc'
 
 @Module({
 	controllers: [SubjectController],
 	providers: [
 		UpdateSubjectUseCase,
 		CreateSubjectUseCase,
+		DeleteSubjectUseCase,
 		AddCoordinatorUseCase,
 		RemoveCoordinatorUseCase,
 		{

@@ -1,7 +1,7 @@
 import { ISubjectRepository } from 'src/domain/interface/repositories/subject.repository'
 import { Entities } from 'src/models'
 
-export class SubjectValidationHelper {
+export class SubjectHelper {
 	static async validateSubject(
 		subjectRepository: ISubjectRepository,
 		subjectId: string
