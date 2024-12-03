@@ -14,8 +14,10 @@ async function bootstrap() {
 		.addBearerAuth()
 		.build()
 
-	const documentFactory = () => SwaggerModule.createDocument(app, config)
-	SwaggerModule.setup('api', app, documentFactory)
+	const document = () => SwaggerModule.createDocument(app, config)
+	SwaggerModule.setup('swagger', app, document, {
+		jsonDocumentUrl: 'swagger/json'
+	})
 
 	await app.listen(process.env.PORT ?? 8080)
 }

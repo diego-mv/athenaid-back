@@ -21,6 +21,6 @@ export class CreateUserUseCase {
 		)
 		const user = await this.userRepository.create(userEntity)
 
-		return user
+		return Mapper.userEntityToDto(user)
 	}
 }

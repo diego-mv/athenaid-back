@@ -14,7 +14,7 @@ export const createUserSchemaToEntity = (
 	}
 }
 
-export const mapUserDtoToUserJwt = (
+export const userDtoToUserJwt = (
 	user: Entities.User
 ): Schemas.UserJwtPayload => {
 	return {
@@ -22,5 +22,14 @@ export const mapUserDtoToUserJwt = (
 		email: user.email,
 		fullname: user.fullname,
 		role: user.role
+	}
+}
+
+export const userEntityToDto = (entity: Entities.User): Schemas.UserDto => {
+	return {
+		email: entity.email,
+		fullname: entity.fullname,
+		id: entity.id,
+		roleId: entity.role_id
 	}
 }

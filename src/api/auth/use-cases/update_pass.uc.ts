@@ -27,9 +27,10 @@ export class UpdatePasswordUseCase {
 			userId,
 			hashedPassword
 		)
-		const payload = Mapper.mapUserDtoToUserJwt(updatedUser)
+		const payload = Mapper.userDtoToUserJwt(updatedUser)
 
 		const accessToken = this.jwtTokenService.generateToken(payload)
+
 		return { accessToken }
 	}
 }

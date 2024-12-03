@@ -2,6 +2,7 @@ import { Inject, Injectable } from '@nestjs/common'
 import { ErrorUpdateRole } from 'src/domain/errors/users'
 import { IRoleRepository } from 'src/domain/interface/repositories/role.repository'
 import { IUserRepository } from 'src/domain/interface/repositories/user.repository'
+import { Mapper } from 'src/mappers'
 import { Schemas } from 'src/models'
 
 @Injectable()
@@ -24,6 +25,7 @@ export class UpdateUserRoleUseCase {
 			throw new ErrorUpdateRole('User not found')
 		}
 
-		return await this.userRepository.updateRole(user.id, role)
+		const updated = await this.userRepository.updateRole(user.id, role)
+		return Mapper.userEntityToDto(updated)
 	}
 }

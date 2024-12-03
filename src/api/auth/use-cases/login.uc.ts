@@ -31,7 +31,7 @@ export class LoginUseCase {
 			throw new ErrorLogin()
 		}
 
-		const payload = Mapper.mapUserDtoToUserJwt(user)
+		const payload = Mapper.userDtoToUserJwt(user)
 
 		const accessToken = this.jwtTokenService.generateToken(payload)
 		return { accessToken }
