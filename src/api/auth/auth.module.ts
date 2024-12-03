@@ -7,6 +7,7 @@ import { AuthController } from './auth.controller'
 import { LoginUseCase } from './use-cases/login.uc'
 import { JwtTokenService } from './jwt-token.service'
 import { JwtAuthGuard } from 'src/infrastructure/server/guards/jwt-auth.guard'
+import { UpdatePasswordUseCase } from './use-cases/update_pass.uc'
 
 @Global()
 @Module({
@@ -26,6 +27,7 @@ import { JwtAuthGuard } from 'src/infrastructure/server/guards/jwt-auth.guard'
 		JwtAuthGuard,
 		JwtTokenService,
 		LoginUseCase,
+		UpdatePasswordUseCase,
 		{
 			provide: 'UserRepository',
 			useFactory: async () => {

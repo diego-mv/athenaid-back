@@ -1,11 +1,17 @@
-import { Body, Controller, Post } from '@nestjs/common'
+import { Body, Controller, Post, Put, UseGuards } from '@nestjs/common'
 import { Schemas } from 'src/models'
 import { LoginUseCase } from './use-cases/login.uc'
 import { Pipes } from 'src/infrastructure/server/pipes'
+import { UpdatePasswordUseCase } from './use-cases/update_pass.uc'
+import { JwtAuthGuard } from 'src/infrastructure/server/guards/jwt-auth.guard'
+import { CurrentUser } from 'src/infrastructure/server/decorators/current-user.decorator'
 
 @Controller('auth')
 export class AuthController {
-	constructor(private readonly loginUseCase: LoginUseCase) {}
+	constructor(
+		private readonly loginUseCase: LoginUseCase,
+		private readonly updatePasswordUC: UpdatePasswordUseCase
+	) {}
 
 	@Post('login')
 	async login(
@@ -13,5 +19,18 @@ export class AuthController {
 		loginDto: Schemas.LoginDto
 	) {
 		return await this.loginUseCase.execute(loginDto)
+	}
+
+	@UseGuards(JwtAuthGuard)
+	@Put('password')
+	async updatePassword(
+		@CurrentUser() currentUser: Schemas.UserJwtPayload,
+		@Body(new Pipes.ZodValidationPipe(Schemas.UpdatePasswordSchema))
+		updatePassDto: Schemas.UpdatePasswordDto
+	) {
+		return await this.updatePasswordUC.execute(
+			currentUser.id,
+			updatePassDto.password
+		)
 	}
 }

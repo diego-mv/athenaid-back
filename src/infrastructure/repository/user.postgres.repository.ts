@@ -29,4 +29,15 @@ export class UserPostgresRepository
 
 		return await this.getById(userId)
 	}
+
+	updateHashPass = async (
+		userId: string,
+		hash: string
+	): Promise<Entities.User> => {
+		const user = await this.getById(userId)
+		user.pass_hash = hash
+		this.repository.update({ id: userId }, user)
+
+		return await this.getById(userId)
+	}
 }

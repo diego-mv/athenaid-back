@@ -33,7 +33,7 @@ export class User {
 	@Column({ name: 'role_id' })
 	role_id: string
 
-	@JoinColumn({ name: 'pass_hash' })
+	@Column({ name: 'pass_hash' })
 	pass_hash?: string
 
 	@OneToMany(

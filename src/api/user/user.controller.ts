@@ -28,7 +28,6 @@ export class UserController {
 		@Body(new Pipes.ZodValidationPipe(Schemas.UpdateUserRoleSchema))
 		updateUserRole: Schemas.UpdateUserRoleDto
 	) {
-		console.log(currentUser)
 		return await this.updateUserRoleUC.execute(updateUserRole)
 	}
 }
