@@ -7,11 +7,17 @@ import {
 } from 'src/dependency-injection'
 import { SubjectController } from './subject.controller'
 import { CreateSubjectUseCase } from './use-cases/create-subject.uc'
+import { UpdateSubjectUseCase } from './use-cases/update-subject.uc'
+import { AddCoordinatorUseCase } from './use-cases/add-coordinator.uc'
+import { RemoveCoordinatorUseCase } from './use-cases/remove-coordinator.uc'
 
 @Module({
 	controllers: [SubjectController],
 	providers: [
+		UpdateSubjectUseCase,
 		CreateSubjectUseCase,
+		AddCoordinatorUseCase,
+		RemoveCoordinatorUseCase,
 		{
 			provide: 'SubjectRepository',
 			useFactory: async () => {

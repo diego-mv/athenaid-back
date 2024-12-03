@@ -11,3 +11,15 @@ export class ErrorCreateSubject extends BadRequestException {
 		)
 	}
 }
+
+export class ErrorUpdateSubject extends BadRequestException {
+	constructor(message?: string, errorCode?: string) {
+		super(
+			{
+				message: message || 'An error occurred while update the subject.',
+				errorCode: errorCode || 'ERROR_UPDATE_SUBJECT'
+			},
+			'Update Subject Error'
+		)
+	}
+}
