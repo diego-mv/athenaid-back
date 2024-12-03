@@ -14,24 +14,24 @@ export class Subject {
 	@Column({ length: 64 })
 	name: string
 
-	@Column({ length: 32, default: '0000ff' })
+	@Column({ name: 'color_hex', length: 32, default: '0000ff' })
 	colorHex: string
 
 	@Column({ default: true })
 	active: boolean
 
 	@OneToMany(() => Section, (section) => section.subjectRel)
-	sectionsRel: Section[]
+	sectionsRel?: Section[]
 
 	@OneToMany(
 		() => SubjectCoordinator,
 		(subjectCoordinator) => subjectCoordinator.subjectRel
 	)
-	subjectCoordinatorsRel: SubjectCoordinator[]
+	subjectCoordinatorsRel?: SubjectCoordinator[]
 
 	@OneToMany(
 		() => AssistantApplication,
 		(assistantApplication) => assistantApplication.subjectRel
 	)
-	assistantApplicationsRel: AssistantApplication[]
+	assistantApplicationsRel?: AssistantApplication[]
 }

@@ -15,9 +15,9 @@ export class SubjectCoordinator {
 
 	@ManyToOne(() => User, (user) => user.subjectCoordinatorsRel)
 	@JoinColumn({ name: 'coordinator_id' })
-	coordinatorRel: User
+	coordinatorRel?: User
 
 	@ManyToOne(() => Subject, (subject) => subject.subjectCoordinatorsRel)
 	@JoinColumn({ name: 'subject_id' })
-	subjectRel: Subject
+	subjectRel?: Subject
 }
