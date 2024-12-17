@@ -43,4 +43,13 @@ export class SubjectPostgresRepository
 
 		return data
 	}
+
+	getAllPaginated = (
+		page?: number,
+		pageSize?: number,
+		filter?: string,
+		filterBy?: (keyof Entities.Subject)[]
+	): Promise<PaginatedData<Entities.Subject>> => {
+		return this.getPaginated({}, { page, pageSize, filter, filterBy })
+	}
 }

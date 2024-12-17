@@ -12,4 +12,12 @@ export class RolePostgresRepository
 	constructor(repository: Repository<Entities.Role>) {
 		super(repository)
 	}
+
+	getByUserId = async (userId: string): Promise<Entities.Role> => {
+		return await this.repository
+			.createQueryBuilder('roles')
+			.leftJoinAndSelect('roles.usersRel', 'users')
+			.where('users.id= :userId', { userId })
+			.getOne()
+	}
 }

@@ -11,4 +11,11 @@ export interface ISubjectRepository
 		filter?: string,
 		filterBy?: (keyof Entities.Subject)[]
 	) => Promise<PaginatedData<Entities.Subject>>
+
+	getAllPaginated: (
+		page?: number,
+		pageSize?: number,
+		filter?: string,
+		filterBy?: (keyof Entities.Subject)[]
+	) => Promise<PaginatedData<Entities.Subject>>
 }

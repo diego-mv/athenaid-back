@@ -1,17 +1,18 @@
 import { Module } from '@nestjs/common'
 import {
 	getDataSource,
+	getRoleRepository,
 	getSubjectCoordinatorRepository,
 	getSubjectRepository,
 	getUserRepository
 } from 'src/dependency-injection'
 import { SubjectController } from './subject.controller'
-import { CreateSubjectUseCase } from './use-cases/create-subject.uc'
-import { UpdateSubjectUseCase } from './use-cases/update-subject.uc'
 import { AddCoordinatorUseCase } from './use-cases/add-coordinator.uc'
-import { RemoveCoordinatorUseCase } from './use-cases/remove-coordinator.uc'
+import { CreateSubjectUseCase } from './use-cases/create-subject.uc'
 import { DeleteSubjectUseCase } from './use-cases/delete-subject.uc'
 import { GetByUserSubjectUseCase } from './use-cases/get-all-subject.uc'
+import { RemoveCoordinatorUseCase } from './use-cases/remove-coordinator.uc'
+import { UpdateSubjectUseCase } from './use-cases/update-subject.uc'
 
 @Module({
 	controllers: [SubjectController],
@@ -41,6 +42,13 @@ import { GetByUserSubjectUseCase } from './use-cases/get-all-subject.uc'
 			useFactory: async () => {
 				const dataSource = await getDataSource()
 				return getUserRepository(dataSource)
+			}
+		},
+		{
+			provide: 'RoleRepository',
+			useFactory: async () => {
+				const dataSource = await getDataSource()
+				return getRoleRepository(dataSource)
 			}
 		}
 	]
