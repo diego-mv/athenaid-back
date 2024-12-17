@@ -11,6 +11,7 @@ import { UpdateSubjectUseCase } from './use-cases/update-subject.uc'
 import { AddCoordinatorUseCase } from './use-cases/add-coordinator.uc'
 import { RemoveCoordinatorUseCase } from './use-cases/remove-coordinator.uc'
 import { DeleteSubjectUseCase } from './use-cases/delete-subject.uc'
+import { GetByUserSubjectUseCase } from './use-cases/get-all-subject.uc'
 
 @Module({
 	controllers: [SubjectController],
@@ -20,6 +21,7 @@ import { DeleteSubjectUseCase } from './use-cases/delete-subject.uc'
 		DeleteSubjectUseCase,
 		AddCoordinatorUseCase,
 		RemoveCoordinatorUseCase,
+		GetByUserSubjectUseCase,
 		{
 			provide: 'SubjectRepository',
 			useFactory: async () => {

@@ -10,65 +10,65 @@ export class AssistantApplication {
 	@PrimaryColumn()
 	id: string
 
+	@Column({ name: 'subject_id' })
+	subject_id: string
+
 	@ManyToOne(() => Subject, (subject) => subject.assistantApplicationsRel, {
 		nullable: true,
 		onDelete: 'SET NULL'
 	})
-	@Column({ name: 'subject_id' })
-	subject_id: string
-
 	@JoinColumn({ name: 'subject_id' })
 	subjectRel: Subject
+
+	@Column({ name: 'user_id' })
+	user_id: string
 
 	@ManyToOne(() => User, (user) => user.assistantApplicationsRel, {
 		nullable: false,
 		onDelete: 'CASCADE'
 	})
-	@Column({ name: 'user_id' })
-	user_id: string
-
 	@JoinColumn({ name: 'user_id' })
 	userRel: User
+
+	@Column({ name: 'period_id' })
+	period_id: string
 
 	@ManyToOne(() => Period, (period) => period.assistantApplicationsRel, {
 		nullable: false,
 		onDelete: 'CASCADE'
 	})
-	@Column({ name: 'period_id' })
-	period_id: string
-
 	@JoinColumn({ name: 'period_id' })
 	periodRel: Period
+
+	@Column({ name: 'event_id' })
+	event_id: string
 
 	@ManyToOne(
 		() => EventApplication,
 		(eventApplication) => eventApplication.assistantApplicationsRel,
 		{ nullable: true, onDelete: 'CASCADE' }
 	)
-	@Column({ name: 'event_id' })
-	event_id: string
-
 	@JoinColumn({ name: 'event_id' })
 	eventRel: EventApplication
+
+	@Column({ name: 'state_id' })
+	state_id: string
 
 	@ManyToOne(
 		() => StateApplication,
 		(stateApplication) => stateApplication.assistantApplicationsRel,
 		{ nullable: true, onDelete: 'SET NULL' }
 	)
-	@Column({ name: 'state_id' })
-	state_id: string
-
 	@JoinColumn({ name: 'state_id' })
 	stateRel: StateApplication
+
+	@Column({ name: 'last_editor_id' })
+	last_editor_id: string
 
 	@ManyToOne(() => User, (user) => user.assistantApplicationsRel, {
 		nullable: true,
 		onDelete: 'SET NULL'
 	})
-	@Column({ name: 'last_editor_id' })
-	last_editor_id: string
-
 	@JoinColumn({ name: 'last_editor_id' })
 	lastEditorRel: User
 

@@ -3,8 +3,8 @@ import { ErrorCreateSubject } from 'src/domain/errors/subject'
 import { ISubjectRepository } from 'src/domain/interface/repositories/subject.repository'
 import { ISubjectCoordinatorRepository } from 'src/domain/interface/repositories/subject_coordinator.repository'
 import { IUserRepository } from 'src/domain/interface/repositories/user.repository'
+import { generateUid } from 'src/infrastructure/id'
 import { Entities, Schemas } from 'src/models'
-import { v4 as uuid } from 'uuid'
 
 @Injectable()
 export class CreateSubjectUseCase {
@@ -21,7 +21,7 @@ export class CreateSubjectUseCase {
 		subjectData: Schemas.CreateSubjectDto
 	): Promise<Entities.Subject | null> => {
 		const subject: Entities.Subject = {
-			id: uuid(),
+			id: generateUid(),
 			active: true,
 			code: subjectData.code,
 			colorHex: subjectData.colorHex,
@@ -38,7 +38,7 @@ export class CreateSubjectUseCase {
 			}
 
 			const subject_coordinator: Entities.SubjectCoordinator = {
-				id: uuid(),
+				id: generateUid(),
 				coordinator_id: subjectData.coordinator_id,
 				subject_id: subject.id
 			}

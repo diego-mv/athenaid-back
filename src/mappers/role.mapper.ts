@@ -1,11 +1,11 @@
+import { generateUid } from 'src/infrastructure/id'
 import { Entities, Schemas } from 'src/models'
-import { v4 as uuid } from 'uuid'
 
 export const createRoleToRoleEntity = (
 	roleData: Schemas.CreateRoleDto
 ): Entities.Role => {
 	return {
-		id: uuid(),
+		id: generateUid(),
 		name: roleData.name
 	}
 }

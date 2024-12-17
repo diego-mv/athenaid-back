@@ -13,11 +13,15 @@ export class SubjectCoordinator {
 	@Column('subject_id')
 	subject_id: string
 
-	@ManyToOne(() => User, (user) => user.subjectCoordinatorsRel)
+	@ManyToOne(() => User, (user) => user.subjectCoordinatorsRel, {
+		onDelete: 'CASCADE'
+	})
 	@JoinColumn({ name: 'coordinator_id' })
 	coordinatorRel?: User
 
-	@ManyToOne(() => Subject, (subject) => subject.subjectCoordinatorsRel)
+	@ManyToOne(() => Subject, (subject) => subject.subjectCoordinatorsRel, {
+		onDelete: 'CASCADE'
+	})
 	@JoinColumn({ name: 'subject_id' })
 	subjectRel?: Subject
 }

@@ -2,12 +2,14 @@ import {
 	Body,
 	Controller,
 	Delete,
+	Get,
 	Param,
 	Post,
 	Put,
+	Query,
 	UseGuards
 } from '@nestjs/common'
-import { ApiSecurity, ApiTags } from '@nestjs/swagger'
+import { ApiQuery, ApiSecurity, ApiTags } from '@nestjs/swagger'
 import { JwtAuthGuard } from 'src/infrastructure/server/guards/jwt-auth.guard'
 import { Pipes } from 'src/infrastructure/server/pipes'
 import { Schemas } from 'src/models'
@@ -16,6 +18,8 @@ import { CreateSubjectUseCase } from './use-cases/create-subject.uc'
 import { DeleteSubjectUseCase } from './use-cases/delete-subject.uc'
 import { RemoveCoordinatorUseCase } from './use-cases/remove-coordinator.uc'
 import { UpdateSubjectUseCase } from './use-cases/update-subject.uc'
+import { GetByUserSubjectUseCase } from './use-cases/get-all-subject.uc'
+import { CurrentUser } from 'src/infrastructure/server/decorators/current-user.decorator'
 
 @ApiTags('subject')
 @ApiSecurity('bearer')
@@ -27,8 +31,42 @@ export class SubjectController {
 		private readonly updateSubjectUC: UpdateSubjectUseCase,
 		private readonly removeCoordinatorUC: RemoveCoordinatorUseCase,
 		private readonly deleteSubjectUC: DeleteSubjectUseCase,
-		private readonly addCoordinatorUC: AddCoordinatorUseCase
+		private readonly addCoordinatorUC: AddCoordinatorUseCase,
+		private readonly getByUserSubjectUC: GetByUserSubjectUseCase
 	) {}
+
+	@Get()
+	@ApiQuery({
+		name: 'page',
+		required: false,
+		description: 'Page number',
+		type: Number
+	})
+	@ApiQuery({
+		name: 'pageSize',
+		required: false,
+		description: 'Number of items per page',
+		type: Number
+	})
+	@ApiQuery({
+		name: 'filter',
+		required: false,
+		description: 'Search filter for the results',
+		type: String
+	})
+	async getAll(
+		@CurrentUser() currentUser: Schemas.UserJwtPayload,
+		@Query('page') page?: number,
+		@Query('pageSize') pageSize?: number,
+		@Query('filter') filter?: string
+	) {
+		return await this.getByUserSubjectUC.execute(
+			currentUser.id,
+			page,
+			pageSize,
+			filter
+		)
+	}
 
 	@Post()
 	async createSubject(

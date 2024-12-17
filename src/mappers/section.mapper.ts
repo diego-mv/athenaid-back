@@ -1,12 +1,12 @@
 import { PaginatedData } from 'src/domain/models/shared'
+import { generateUid } from 'src/infrastructure/id'
 import { Entities, Schemas } from 'src/models'
-import { v4 as uuid } from 'uuid'
 
 export const createSectionDtoToEntity = (
 	createDto: Schemas.CreateSectionDto
 ): Entities.Section => {
 	return {
-		id: uuid(),
+		id: generateUid(),
 		code: createDto.code,
 		active: true,
 		subject_id: createDto.subject_id

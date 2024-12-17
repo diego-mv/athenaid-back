@@ -1,12 +1,12 @@
 import { Inject, Injectable } from '@nestjs/common'
 import { ErrorUpdateSubject } from 'src/domain/errors/subject'
+import { SubjectHelper } from 'src/domain/helpers/subject.helper'
+import { UserHelper } from 'src/domain/helpers/user.helper'
 import { ISubjectRepository } from 'src/domain/interface/repositories/subject.repository'
 import { ISubjectCoordinatorRepository } from 'src/domain/interface/repositories/subject_coordinator.repository'
 import { IUserRepository } from 'src/domain/interface/repositories/user.repository'
-import { SubjectHelper } from 'src/domain/helpers/subject.helper'
-import { UserHelper } from 'src/domain/helpers/user.helper'
+import { generateUid } from 'src/infrastructure/id'
 import { Entities, Schemas } from 'src/models'
-import { v4 as uuid } from 'uuid'
 
 @Injectable()
 export class AddCoordinatorUseCase {
@@ -42,7 +42,7 @@ export class AddCoordinatorUseCase {
 			}
 
 			const subjectCoordinator: Entities.SubjectCoordinator = {
-				id: uuid(),
+				id: generateUid(),
 				coordinator_id: subjectCoordinatorData.coordinator_id,
 				subject_id: subjectCoordinatorData.subject_id
 			}

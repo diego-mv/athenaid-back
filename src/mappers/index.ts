@@ -3,6 +3,7 @@ import {
 	createSectionDtoToEntity,
 	paginatedSectionEntityToDto
 } from './section.mapper'
+import { paginatedSubjectEntityToDto } from './subject.mapper'
 import {
 	createUserSchemaToEntity,
 	userDtoToUserJwt,
@@ -15,5 +16,6 @@ export const Mapper = {
 	userDtoToUserJwt,
 	userEntityToDto,
 	createSectionDtoToEntity,
-	paginatedSectionEntityToDto
+	paginatedSectionEntityToDto,
+	paginatedSubjectEntityToDto
 }

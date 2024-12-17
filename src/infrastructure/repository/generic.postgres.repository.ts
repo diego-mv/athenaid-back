@@ -3,6 +3,7 @@ import { PaginatedData } from 'src/domain/models/shared'
 import {
 	Brackets,
 	FindOptionsWhere,
+	SelectQueryBuilder,
 	Repository as TypeOrmRepository
 } from 'typeorm'
 import { QueryDeepPartialEntity } from 'typeorm/query-builder/QueryPartialEntity'
@@ -21,8 +22,41 @@ export class GenericRepository<T extends { id: string }> {
 		})
 	}
 
+	getPaginatedByQueryBuilder = async (
+		queryBuilder: SelectQueryBuilder<T>,
+		options?: {
+			page: number
+			pageSize: number
+			filter?: string
+			filterBy?: (keyof T)[]
+		}
+	): Promise<PaginatedData<T>> => {
+		const { page, pageSize, filter, filterBy } = options
+
+		if (filter && filterBy.length) {
+			const filterConditions = filterBy
+				.map(
+					(field) =>
+						`LOWER(${queryBuilder.alias}.${field as string}) LIKE :filter`
+				)
+				.join(' OR ')
+
+			queryBuilder.andWhere(`(${filterConditions})`, {
+				filter: `%${filter.toLowerCase()}%`
+			})
+		}
+
+		const total = await queryBuilder.getCount()
+
+		queryBuilder.skip((page - 1) * pageSize).take(pageSize)
+
+		const data = await queryBuilder.getMany()
+
+		return { data, total, page, pageSize }
+	}
+
 	getPaginated = async (
-		where: AtLeastOne<T>,
+		where: AtLeastOne<T> | object,
 		options?: {
 			page: number
 			pageSize: number

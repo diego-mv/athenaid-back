@@ -8,13 +8,13 @@ export class Assistant {
 	@PrimaryColumn()
 	id: string
 
+	@Column({ name: 'user_id' })
+	user_id: string
+
 	@ManyToOne(() => User, (user) => user.assistantsRel, {
 		nullable: false,
 		onDelete: 'CASCADE'
 	})
-	@Column({ name: 'user_id' })
-	user_id: string
-
 	@JoinColumn({ name: 'user_id' })
 	userRel: User
 
@@ -28,13 +28,13 @@ export class Assistant {
 	@Column({ name: 'section_id' })
 	section_id: string
 
+	@Column({ name: 'period_id' })
+	period_id: string
+
 	@ManyToOne(() => Period, (period) => period.assistantsRel, {
 		nullable: false,
 		onDelete: 'CASCADE'
 	})
-	@Column({ name: 'period_id' })
-	period_id: string
-
 	@JoinColumn({ name: 'period_id' })
 	periodRel: Period
 }
